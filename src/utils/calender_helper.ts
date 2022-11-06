@@ -18,6 +18,9 @@ export class CalenderHelper {
   protected getParsedStartDate(eventIndex: number): DateTime {
     return DateHelper.parseDate(this.calendar.events!.at(eventIndex)!.start_date!);
   }
+  protected getParsedEndDate(eventIndex: number): DateTime {
+    return DateHelper.parseDate(this.calendar.events!.at(eventIndex)!.end_date!);
+  }
 
   /**
    * It returns the first day of the calendar
@@ -34,7 +37,7 @@ export class CalenderHelper {
   public get lastDayDateInCalender(): DateTime {
     try {
       //Skipping the last event in the calendar because it's always referer to an event for the next semester
-      return this.getParsedStartDate(this.calendar.events!.length - 2);
+      return this.getParsedEndDate(this.calendar.events!.length - 3);
     } catch (error) {
       throw new Error(
         "(CalenderHelper/getLastDayDateInCalender): Couldn't find calendar events, this might be related to KFUPM calendar API",
